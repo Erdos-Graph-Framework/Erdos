@@ -1,0 +1,29 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    jcenter()
+}
+
+/*
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+    }
+
+    test {
+        java {
+            srcDir 'src/test/java'
+        }
+    }
+}
+*/
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile "junit:junit:4.11"
+}
