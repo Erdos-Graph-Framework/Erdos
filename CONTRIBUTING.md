@@ -3,6 +3,10 @@
 ### guidelines
 * please fork and propose a pull request with `github.com`
 * please follow the code conventions and style.
+
+### wishlist
+* binary operations on graphs such as merging two graphs into one new happy graph.
+* factory methods for bulk generation of nodes.
 * unit testing contributions will be awesome.
 
 ### Contact Author
