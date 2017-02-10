@@ -1,4 +1,4 @@
-package com.hendrix.test;
+package com.hendrix.example;
 
 import com.hendrix.erdos.Erdos;
 import com.hendrix.erdos.algorithms.AllPairsShortPathResult;
@@ -36,12 +36,12 @@ import java.util.LinkedList;
 /**
  * @author Tomer Shalev
  */
-public class GraphTests {
+public class GraphExamples {
     //private AbstractGraph<IGraphEngine> graph;
     //private AbstractGraph graph;
     private IVertex _v0;
 
-    public GraphTests() {
+    public GraphExamples() {
         AbstractGraph ag = Erdos.newGraphWithEngine(new AdjIncidenceGraphEngine(), Edge.EDGE_DIRECTION.DIRECTED, false, false);
 
         //generalTest();
