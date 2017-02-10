@@ -2,7 +2,7 @@ package com.hendrix.erdos.algorithms.factories;
 
 import com.hendrix.erdos.graphs.IUndirectedGraph;
 import com.hendrix.erdos.graphs.UndirectedGraph;
-import com.hendrix.erdos.algorithms.GraphAlgorithm;
+import com.hendrix.erdos.algorithms.AbstractGraphAlgorithm;
 import com.hendrix.erdos.algorithms.MSTKruskal;
 import com.hendrix.erdos.algorithms.MSTPrim;
 import com.hendrix.erdos.types.IVertex;
@@ -29,7 +29,7 @@ public class MinSpanTreeFactory {
      * @return the MST graph algorithm
      */
     @SuppressWarnings("UnusedDeclaration")
-    static public GraphAlgorithm<UndirectedGraph, IUndirectedGraph> newMST(IUndirectedGraph graph, MstAlgorithm algorithm, IVertex startVertex) {
+    static public AbstractGraphAlgorithm<UndirectedGraph, IUndirectedGraph> newMST(IUndirectedGraph graph, MstAlgorithm algorithm, IVertex startVertex) {
         switch (algorithm) {
             case KRUSKAL:
                 return new MSTKruskal(graph);

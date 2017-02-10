@@ -16,7 +16,7 @@ import java.util.LinkedList;
  * computes the Strongly Connected Components of input Graph G
  * @author Tomer Shalev
  */
-public class SCC extends GraphAlgorithm<ArrayList<HashSet<IVertex>>, IDirectedGraph> {
+public class SCC extends AbstractGraphAlgorithm<ArrayList<HashSet<IVertex>>, IDirectedGraph> {
 
     public SCC(IDirectedGraph graph_input) {
         super(graph_input, "Strongly Connected Components");

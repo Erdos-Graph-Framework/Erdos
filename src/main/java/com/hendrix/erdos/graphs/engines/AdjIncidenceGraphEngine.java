@@ -544,7 +544,21 @@ public class AdjIncidenceGraphEngine extends AbstractGraphEngine {
      */
     @Override
     public Edge addEdge(IVertex v1, IVertex v2) {
-        Edge edge = new Edge(v1, v2, getGraphType());
+        return addEdge(v1, v2, 0f);
+    }
+
+    /**
+     * connect an edge (v1, v2) into the graph, v1 and v2 have to be members
+     *
+     * @param v1 a vertex that already belong to the graph
+     * @param v2 a vertex that already belong to the graph
+     * @param weight weight of the edge
+     *
+     * @return the edge so use can query the id
+     */
+    @Override
+    public Edge addEdge(IVertex v1, IVertex v2, float weight) {
+        Edge edge = new Edge(v1, v2, getGraphType(), weight);
 
         return addEdge(edge);
     }

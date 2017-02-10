@@ -13,7 +13,7 @@ import java.util.Collection;
  * @author Tomer Shalev
  */
 @SuppressWarnings("UnusedDeclaration")
-public class Square extends GraphAlgorithm<AbstractGraph, IGraph> {
+public class Square extends AbstractGraphAlgorithm<AbstractGraph, IGraph> {
 
     public Square(AbstractGraph graph_input) {
         super(graph_input, "Square");

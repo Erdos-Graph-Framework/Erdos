@@ -9,7 +9,7 @@ import com.hendrix.erdos.graphs.IDirectedGraph;
  * @author Tomer Shalev
  */
 @SuppressWarnings("UnusedDeclaration")
-public class FloydWarshall extends GraphAlgorithm<AllPairsShortPathResult, IDirectedGraph> {
+public class FloydWarshall extends AbstractGraphAlgorithm<AllPairsShortPathResult, IDirectedGraph> {
 
     public FloydWarshall(IDirectedGraph graph_input) {
         super(graph_input, "result Floyd Warshall Algorithm");

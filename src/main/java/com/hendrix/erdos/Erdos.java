@@ -61,13 +61,13 @@ public class Erdos {
      *
      * @return a new graph
      */
-    static public <T extends IGraphEngine> AbstractGraph newGraphWithEngine(final T graphEngine, final EDGE_DIRECTION direction,
+    static public <T extends IGraphEngine, R extends AbstractGraph> R newGraphWithEngine(final T graphEngine, final EDGE_DIRECTION direction,
                                                                             final boolean selfLoops, final boolean multiEdges) {
         switch (direction) {
             case DIRECTED:
-                return newDirectedGraphWithEngine(graphEngine, selfLoops, multiEdges);
+                return (R) newDirectedGraphWithEngine(graphEngine, selfLoops, multiEdges);
             case UNDIRECTED:
-                return newUndirectedGraphWithEngine(graphEngine, selfLoops, multiEdges);
+                return (R) newUndirectedGraphWithEngine(graphEngine, selfLoops, multiEdges);
         }
 
         return null;
@@ -83,7 +83,7 @@ public class Erdos {
      *
      * @return a new graph
      */
-    static private <T extends IGraphEngine> DirectedGraph newDirectedGraphWithEngine(final T graphEngine, final boolean selfLoops,
+    static public  <T extends IGraphEngine> DirectedGraph newDirectedGraphWithEngine(final T graphEngine, final boolean selfLoops,
                                                                                      final boolean multiEdges) {
         return new DirectedGraph() {
             @Override
@@ -113,7 +113,7 @@ public class Erdos {
      *
      * @return a new graph
      */
-    static private <T extends IGraphEngine> UndirectedGraph newUndirectedGraphWithEngine(final T graphEngine, final boolean selfLoops,
+    static public <T extends IGraphEngine> UndirectedGraph newUndirectedGraphWithEngine(final T graphEngine, final boolean selfLoops,
                                                                                          final boolean multiEdges) {
         return new UndirectedGraph() {
             @Override

@@ -20,7 +20,7 @@ import java.util.HashMap;
  * @author Tomer Shalev
  */
 @SuppressWarnings("UnusedDeclaration")
-public class TransitiveClosure extends GraphAlgorithm<IDirectedGraph, IDirectedGraph> {
+public class TransitiveClosure extends AbstractGraphAlgorithm<IDirectedGraph, IDirectedGraph> {
 
     public TransitiveClosure(IDirectedGraph graph_input) {
         super(graph_input, "Transitive Closure algorithm");

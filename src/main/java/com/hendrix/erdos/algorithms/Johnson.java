@@ -26,7 +26,7 @@ import java.util.HashMap;
  * @author Tomer Shalev
  */
 @SuppressWarnings("UnusedDeclaration")
-public class Johnson extends GraphAlgorithm<AllPairsShortPathResult, IDirectedGraph> {
+public class Johnson extends AbstractGraphAlgorithm<AllPairsShortPathResult, IDirectedGraph> {
     private HashMap<IVertex, Float> H = null;
     private EdgeFunction W_cap = null;
 

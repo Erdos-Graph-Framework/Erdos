@@ -13,7 +13,7 @@ import java.util.Collection;
  * @author Tomer Shalev
  */
 @SuppressWarnings("UnusedDeclaration")
-public class Undirected extends GraphAlgorithm<UndirectedGraph, IDirectedGraph> {
+public class Undirected extends AbstractGraphAlgorithm<UndirectedGraph, IDirectedGraph> {
 
     public Undirected(IDirectedGraph graph_input) {
         super(graph_input, "Transpose");

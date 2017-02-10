@@ -17,7 +17,7 @@ import java.util.Set;
  * @author Tomer Shalev
  */
 @SuppressWarnings("UnusedDeclaration")
-public class MSTPrim extends GraphAlgorithm<UndirectedGraph, IUndirectedGraph> {
+public class MSTPrim extends AbstractGraphAlgorithm<UndirectedGraph, IUndirectedGraph> {
     /**
      * the predecessor of u is stored in PIE. If u has no predecessor (for example, if u = s or u has not been discovered), then π[u] = NIL
      */
@@ -54,7 +54,7 @@ public class MSTPrim extends GraphAlgorithm<UndirectedGraph, IUndirectedGraph> {
      *
      * @param vertex the starting vertex
      */
-    public GraphAlgorithm<UndirectedGraph, IUndirectedGraph> setStartVertex(IVertex vertex) {
+    public AbstractGraphAlgorithm<UndirectedGraph, IUndirectedGraph> setStartVertex(IVertex vertex) {
         _startVertex = vertex;
 
         return this;

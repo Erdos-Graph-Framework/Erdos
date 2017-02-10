@@ -1,6 +1,8 @@
 package com.hendrix.example;
 
 import com.hendrix.erdos.Erdos;
+import com.hendrix.erdos.algorithms.AbstractGraphAlgorithm;
+import com.hendrix.erdos.algorithms.AbstractShortestPathAlgorithm;
 import com.hendrix.erdos.algorithms.AllPairsShortPathResult;
 import com.hendrix.erdos.algorithms.BFS;
 import com.hendrix.erdos.algorithms.BellmanFordShortestPath;
@@ -14,9 +16,14 @@ import com.hendrix.erdos.algorithms.ShortestPathsTree;
 import com.hendrix.erdos.algorithms.TopologicalSort;
 import com.hendrix.erdos.algorithms.TransitiveClosure;
 import com.hendrix.erdos.algorithms.factories.AllPairsShortPathFactory;
+import com.hendrix.erdos.algorithms.factories.MinSpanTreeFactory;
+import com.hendrix.erdos.algorithms.factories.MinSpanTreeFactory.MstAlgorithm;
+import com.hendrix.erdos.algorithms.factories.SingleSourceShortPathFactory;
 import com.hendrix.erdos.exceptions.AlgorithmException;
 import com.hendrix.erdos.graphs.AbstractGraph;
+import com.hendrix.erdos.graphs.DirectedGraph;
 import com.hendrix.erdos.graphs.IDirectedGraph;
+import com.hendrix.erdos.graphs.IUndirectedGraph;
 import com.hendrix.erdos.graphs.SimpleDirectedGraph;
 import com.hendrix.erdos.graphs.SimpleGraph;
 import com.hendrix.erdos.graphs.UndirectedGraph;
@@ -143,7 +150,7 @@ public class GraphExamples {
 
         System.out.println(floyd_result.shortestPathBetween(v5, v2).toString());
 
-        AllPairsShortPathResult johnson_result = AllPairsShortPathFactory.newAllPairsShortPath(graph, AllPairsShortPathFactory.APSPAlgorithm.Johnson);
+        AllPairsShortPathResult johnson_result = AllPairsShortPathFactory.newAllPairsShortPath(graph, AllPairsShortPathFactory.APSPAlgorithm.Johnson).applyAlgorithm();
 
 
         System.out.println("");
@@ -255,16 +262,11 @@ public class GraphExamples {
     {
         SimpleDirectedGraph graph = new SimpleDirectedGraph();
 
-        Vertex s = new Vertex();
-        s.setTag("s");
-        Vertex t = new Vertex();
-        t.setTag("t");
-        Vertex x = new Vertex();
-        x.setTag("x");
-        Vertex y = new Vertex();
-        y.setTag("y");
-        Vertex z = new Vertex();
-        z.setTag("z");
+        Vertex s = new Vertex("s");
+        Vertex t = new Vertex("t");
+        Vertex x = new Vertex("x");
+        Vertex y = new Vertex("y");
+        Vertex z = new Vertex("z");
 
         graph.addVertex(s);
         graph.addVertex(t);
@@ -272,30 +274,18 @@ public class GraphExamples {
         graph.addVertex(y);
         graph.addVertex(z);
 
-        Edge e1 = new Edge(s, t, Edge.EDGE_DIRECTION.DIRECTED, 6);
-        Edge e2 = new Edge(t, x, Edge.EDGE_DIRECTION.DIRECTED, 5);
-        Edge e3 = new Edge(x, t, Edge.EDGE_DIRECTION.DIRECTED, -2);
-        Edge e4 = new Edge(s, y, Edge.EDGE_DIRECTION.DIRECTED, 7);
-        Edge e5 = new Edge(y, z, Edge.EDGE_DIRECTION.DIRECTED, 9);
-        Edge e6 = new Edge(t, y, Edge.EDGE_DIRECTION.DIRECTED, 8);
-        Edge e7 = new Edge(z, x, Edge.EDGE_DIRECTION.DIRECTED, 7);
-        Edge e8 = new Edge(t, z, Edge.EDGE_DIRECTION.DIRECTED, -4);
-        Edge e9 = new Edge(y, x, Edge.EDGE_DIRECTION.DIRECTED, -3);
-        Edge e10 = new Edge(z, s, Edge.EDGE_DIRECTION.DIRECTED, 2);
-
-        graph.addEdge(e1);
-        graph.addEdge(e2);
-        graph.addEdge(e3);
-        graph.addEdge(e4);
-        graph.addEdge(e5);
-        graph.addEdge(e6);
-        graph.addEdge(e7);
-        graph.addEdge(e8);
-        graph.addEdge(e9);
-        graph.addEdge(e10);
+        graph.addEdge(s, t, 6);
+        graph.addEdge(t, x, 5);
+        graph.addEdge(x, t, -2);
+        graph.addEdge(s, y, 7);
+        graph.addEdge(y, z, 9);
+        graph.addEdge(t, y, 8);
+        graph.addEdge(z, x, 7);
+        graph.addEdge(t, z, -4);
+        graph.addEdge(y, x, -3);
+        graph.addEdge(z, s, 2);
 
         graph.setTag("graph");
-
         graph.print();
 
         ShortestPathsTree res = new BellmanFordShortestPath(graph).setStartVertex(s).applyAlgorithm();
@@ -304,13 +294,31 @@ public class GraphExamples {
 
         System.out.println("");
     }
+    private void general_erdos() {
+        boolean allow_self_loops = true;
+        boolean allow_multi_edges = true;
+
+        UndirectedGraph graph_undirected = Erdos.newUndirectedGraphWithEngine(new AdjIncidenceGraphEngine(), allow_self_loops, allow_multi_edges);
+        DirectedGraph graph = Erdos.newGraphWithEngine(new AdjIncidenceGraphEngine(), Edge.EDGE_DIRECTION.DIRECTED, allow_self_loops, allow_multi_edges);
+
+        graph.vertices().iterator().remove();
+
+        Iterator<IVertex> iterator = graph.vertices().iterator();
+
+        while (iterator.hasNext()) {
+            IVertex next = iterator.next();
+
+            if(next.getTag().equals("tag_v2"))
+                iterator.remove();
+        }
+
+    }
 
     private void generalTest() {
         SimpleDirectedGraph graph = new SimpleDirectedGraph();
         Vertex v0 = new Vertex();
         Vertex v1 = new Vertex();
         Vertex v2 = new Vertex();
-
         Vertex v3 = new Vertex();
 
         _v0 = v0;
@@ -322,9 +330,7 @@ public class GraphExamples {
 
         graph.addEdge(v0, v1);
         graph.addEdge(v0, v2);
-
         graph.addEdge(v1, v2);
-
         graph.addEdge(v2, v3);
         graph.addEdge(v2, v0);
 
@@ -345,9 +351,13 @@ public class GraphExamples {
              //iter.remove();
         }
 
+        for (Edge edge : graph.edges()) {
+            System.out.println(edge.toString());
+        }
+
 
         for (IVertex vertex : graph) {
-
+            vertex.toString();
         }
 
         for (IVertex vertex : coll) {

@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * @see MinSpanTreeFactory
  */
 @SuppressWarnings("UnusedDeclaration")
-public class MSTKruskal extends GraphAlgorithm<UndirectedGraph, IUndirectedGraph> {
+public class MSTKruskal extends AbstractGraphAlgorithm<UndirectedGraph, IUndirectedGraph> {
 
     public MSTKruskal(IUndirectedGraph graph_input) {
         super(graph_input, "MST_Kruskal");

@@ -12,7 +12,7 @@ import java.util.Collection;
  * computes a new Transpose graph of input Graph G
  * @author Tomer Shalev
  */
-public class Transpose extends GraphAlgorithm<DirectedGraph, IDirectedGraph> {
+public class Transpose extends AbstractGraphAlgorithm<DirectedGraph, IDirectedGraph> {
 
     public Transpose(IDirectedGraph graph_input) {
         super(graph_input, "Transpose");

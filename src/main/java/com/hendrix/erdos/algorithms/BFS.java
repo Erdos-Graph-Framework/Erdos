@@ -19,7 +19,7 @@ import java.util.Set;
 /**
  * @author Tomer Shalev
  */
-public class BFS extends GraphAlgorithm<BreadthFirstTree, IGraph>
+public class BFS extends AbstractGraphAlgorithm<BreadthFirstTree, IGraph>
 {
     protected IVertex _sourceIVertex     = null;
     /**

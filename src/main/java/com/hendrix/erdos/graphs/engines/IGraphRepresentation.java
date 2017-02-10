@@ -114,6 +114,16 @@ public interface IGraphRepresentation {
     /**
      * connect an edge (v1, v2) into the graph, v1 and v2 have to be members
      *
+     * @param v1 a vertex that already belong to the graph
+     * @param v2 a vertex that already belong to the graph
+     * @param weight the weight of the edge
+     * @return the edge so use can query the id
+     */
+    Edge addEdge(IVertex v1, IVertex v2, float weight);
+
+    /**
+     * connect an edge (v1, v2) into the graph, v1 and v2 have to be members
+     *
      * @param edge the edge to add
      * @return the edge so use can query the id
      */

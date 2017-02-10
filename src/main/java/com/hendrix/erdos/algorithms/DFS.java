@@ -17,7 +17,7 @@ import java.util.Set;
 /**
  * @author Tomer Shalev
  */
-public class DFS extends GraphAlgorithm<DFS.DepthFirstForest, IGraph>
+public class DFS extends AbstractGraphAlgorithm<DFS.DepthFirstForest, IGraph>
 {
     /**
      * edge classification

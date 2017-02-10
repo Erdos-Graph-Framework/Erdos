@@ -8,26 +8,26 @@ import com.hendrix.erdos.graphs.IGraph;
  * @param <T> the return type of the algorithm
  * @param <E> the input type of the algorithm
  */
-abstract public class GraphAlgorithm<T, E extends IGraph> implements IGraphAlgorithm<T, E>
+abstract public class AbstractGraphAlgorithm<T, E extends IGraph> implements IGraphAlgorithm<T, E>
 {
     protected E         _graph_input       = null;
     protected T         _result_algorithm  = null;
     protected String    _tag               = "empty";
 
-    public GraphAlgorithm(E graph_input, String tag) {
+    public AbstractGraphAlgorithm(E graph_input, String tag) {
         _graph_input  = graph_input;
         _tag          = tag;
     }
 
-    public GraphAlgorithm(E graph_input) {
+    public AbstractGraphAlgorithm(E graph_input) {
         this(graph_input, null);
     }
 
-    public GraphAlgorithm(String tag) {
+    public AbstractGraphAlgorithm(String tag) {
         this(null, tag);
     }
 
-    public GraphAlgorithm() {}
+    public AbstractGraphAlgorithm() {}
 
         @Override
     public void setInputGraph(E graph) {

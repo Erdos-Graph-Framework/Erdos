@@ -1,5 +1,6 @@
 package com.hendrix.erdos.algorithms.factories;
 
+import com.hendrix.erdos.algorithms.AbstractGraphAlgorithm;
 import com.hendrix.erdos.algorithms.AllPairsShortPathResult;
 import com.hendrix.erdos.algorithms.FloydWarshall;
 import com.hendrix.erdos.algorithms.Johnson;
@@ -26,12 +27,12 @@ public class AllPairsShortPathFactory {
      * @return the algorithm
      */
     @SuppressWarnings("UnusedDeclaration")
-    static public AllPairsShortPathResult newAllPairsShortPath(IDirectedGraph graph, APSPAlgorithm algorithm) {
+    static public AbstractGraphAlgorithm<AllPairsShortPathResult, IDirectedGraph> newAllPairsShortPath(IDirectedGraph graph, APSPAlgorithm algorithm) {
         switch (algorithm) {
             case FloydWarshall:
-                return new FloydWarshall(graph).applyAlgorithm();
+                return new FloydWarshall(graph);
             case Johnson:
-                return new Johnson(graph).applyAlgorithm();
+                return new Johnson(graph);
         }
 
         return null;

@@ -11,7 +11,7 @@ import java.util.LinkedList;
  * computes a Topological Sort of input Graph G
  * @author Tomer Shalev
  */
-public class TopologicalSort extends GraphAlgorithm<LinkedList<IVertex>, IDirectedGraph> {
+public class TopologicalSort extends AbstractGraphAlgorithm<LinkedList<IVertex>, IDirectedGraph> {
 
     public TopologicalSort(IDirectedGraph graph_input) {
         super(graph_input, "TopologicalSort");

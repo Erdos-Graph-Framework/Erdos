@@ -21,6 +21,16 @@ public class Vertex<T> implements IVertex<T>
 
     public Vertex()
     {
+        this(null);
+    }
+
+    /**
+     *
+     * @param tag tag the vertex
+     */
+    public Vertex(String tag)
+    {
+        _tag = tag;
         _id = getAutoId();
     }
 

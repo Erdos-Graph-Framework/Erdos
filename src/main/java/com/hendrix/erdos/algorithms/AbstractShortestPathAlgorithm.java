@@ -18,7 +18,7 @@ import java.util.LinkedHashMap;
  * @author Tomer Shalev
  */
 @SuppressWarnings("UnusedDeclaration")
-abstract public class AbstractShortestPathAlgorithm<E extends IGraph> extends GraphAlgorithm<ShortestPathsTree, E> {
+abstract public class AbstractShortestPathAlgorithm<E extends IGraph> extends AbstractGraphAlgorithm<ShortestPathsTree, E> {
     /**
      * the predecessor of u is stored in PIE. If u has no predecessor (for example, if u = s or u has not been discovered), then π[u] = NIL
      */
