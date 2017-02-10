@@ -21,7 +21,7 @@ Add to your dependencies:
 
 ```groovy
 dependencies {
-    compile 'com.github.HendrixString:Android-PdfMyXml:{Tag}' // the latest version is "v1.0.1"
+    compile 'tbd'
 }
 ```
 
@@ -75,7 +75,7 @@ with the correct abstractions and utilities. The builtin algorithms are:
     * [Johnson's algorithm](https://en.wikipedia.org/wiki/Johnson's_algorithm)
 * minimum spanning tree
     * [Prim's algorithm](https://en.wikipedia.org/wiki/Prim's_algorithm)
-    * [Kruskal's algorithm](hhttps://en.wikipedia.org/wiki/Kruskal's_algorithm)
+    * [Kruskal's algorithm](https://en.wikipedia.org/wiki/Kruskal's_algorithm)
 * transformations
     * Square of a graph
     * transitive closure of a graph
@@ -84,99 +84,154 @@ with the correct abstractions and utilities. The builtin algorithms are:
 ## builtin graph engines
 * **Adjacency** and **Incidence** list based graph engine <br/>designed for optimal complexity for algorithms that require more than a moderate edge queries.
 
-### Instructions
-#### 1. create XML layouts
-First create XML layouts. give it dimensions in **pixels** (and for all it's sub views) and proportions according landscape or portrait according to ratio **1:1.41**.<br/><br/>
-page1.xml
+### Instructions, code by examples
+#### 1. creating a very simple graph
+
 ```java
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="2115px"
-                android:layout_height="1500px"
-                android:background="@color/white">
-  <TextView android:id="@+id/tv_hello"
-                android:textColor="@color/black"
-                android:textSize="27px"
-                android:textStyle="bold"
-                android:padding="6px"/>
+SimpleDirectedGraph graph_triangle = new SimpleDirectedGraph();
 
-</RelativeLayout>
-```
+Vertex v0 = new Vertex();
+Vertex v1 = new Vertex();
+Vertex v2 = new Vertex("tag_v2");
 
-you can create as many as pages/templates as you need.
+graph_triangle.addVertex(v0);
+graph_triangle.addVertex(v1);
+graph_triangle.addVertex(v2);
 
-#### 2. Implement a View renderer
-implement your View renderer by extending `AbstractViewRenderer` or by anonymously instantiating it and injecting the layout id. the initView(View view) will supply you an inflated View automatically. There are other options but I wont cover it now.
-```java
-AbstractViewRenderer page = new AbstractViewRenderer(context, R.layout.page1) {
-    private String _text;
+Edge e_0 = graph_triangle.addEdge(v0, v1);
+graph_triangle.addEdge(v1, v2);
+graph_triangle.addEdge(v2, v3);
 
-    public void setText(String text) {
-        _text = text;
-    }
+graph_triangle.print();
 
-    @Override
-    protected void initView(View view) {
-        TextView tv_hello = (TextView)view.findViewById(R.id.tv_hello);
-         tv_hello.setText(_text);
-    }
-};
+// iterate the graph vertices directly
+for (IVertex vertex : graph_triangle) {
+    System.out.println(vertex.toString());
+}
 
-// you can reuse the bitmap if you want
-page.setReuseBitmap(true);
+// iterate the edges of the graph
+for (Edge edge : graph_triangle.edges()) {
+    System.out.println(edge.toString());
+}
+
+// removing a vertex in any of the following ways will remove it's connected edges as well,
+// also removing any edge in similar fashion will update the graph :)
+graph_triangle.removeVertex(v0);
+graph_triangle.vertices().remove(v1);
+graph_triangle.vertices().iterator().remove();
 
 ```
 
-#### 3. Build the PDF document
-Use `PdfDocument` or `PdfDocument.Builder` to add pages and render and run it all at background with progress bar.
+#### 2. use a factory for custom graph
+you can define your graph in terms of self loops, multi edges (per vertex) and
+a custom implementation of a graph engine.
 ```java
-PdfDocument doc            = new PdfDocument(ctx);
+boolean allow_self_loops = true;
+boolean allow_multi_edges = true;
 
-// add as many pages as you have
-doc.addPage(page);
+UndirectedGraph graph_undirected = Erdos.newUndirectedGraphWithEngine(new AdjIncidenceGraphEngine(), 
+                                                                      allow_self_loops, allow_multi_edges);
 
-doc.setRenderWidth(2115);
-doc.setRenderHeight(1500);
-doc.setOrientation(PdfDocument.A4_MODE.LANDSCAPE);
-doc.setProgressTitle(R.string.gen_please_wait);
-doc.setProgressMessage(R.string.gen_pdf_file);
-doc.setFileName("test");
-doc.setInflateOnMainThread(false);
-doc.setListener(new PdfDocument.Callback() {
-    @Override
-    public void onComplete(File file) {
-        Log.i(PdfDocument.TAG_PDF_MY_XML, "Complete");
-    }
-
-    @Override
-    public void onError(Exception e) {
-        Log.i(PdfDocument.TAG_PDF_MY_XML, "Error");
-    }
-});
-
-doc.createPdf(ctx);
+DirectedGraph graph = Erdos.newGraphWithEngine(new AdjIncidenceGraphEngine(), 
+                                               Edge.EDGE_DIRECTION.DIRECTED,
+                                               allow_self_loops, allow_multi_edges);
 
 ```
 
-or use `PdfDocument.Builder`
-```java
-new PdfDocument.Builder(ctx).addPage(page).filename("test").orientation(PdfDocument.A4_MODE.LANDSCAPE)
-                         .progressMessage(R.string.gen_pdf_file).progressTitle(R.string.gen_please_wait).renderWidth(2115).renderHeight(1500)
-                         .listener(new PdfDocument.Callback() {
-                             @Override
-                             public void onComplete(File file) {
-                                 Log.i(PdfDocument.TAG_PDF_MY_XML, "Complete");
-                             }
+#### 3. algorithms introduction
+every algorithm extends `AbstractGraphAlgorithm<T, E extends IGraph>`, which is generically
+typed `E` for input graph and `T` for output and must implement
+* `T applyAlgorithm()` method
 
-                             @Override
-                             public void onError(Exception e) {
-                                 Log.i(PdfDocument.TAG_PDF_MY_XML, "Error");
-                             }
-                         }).create().createPdf(this);
+for example, the **`Bellman-Ford`** algorithm for single source shortest path,
+followed by the **`Floyd-Warshall`** algorithm for all pairs shortest paths.
+
+```java
+private void BellmanFord()
+{
+    SimpleDirectedGraph graph = new SimpleDirectedGraph();
+
+    Vertex s = new Vertex("s");
+    Vertex t = new Vertex("t");
+    Vertex x = new Vertex("x");
+    Vertex y = new Vertex("y");
+    Vertex z = new Vertex("z");
+
+    graph.addVertex(s);
+    graph.addVertex(t);
+    graph.addVertex(x);
+    graph.addVertex(y);
+    graph.addVertex(z);
+
+    graph.addEdge(s, t, 6);
+    graph.addEdge(t, x, 5);
+    graph.addEdge(x, t, -2);
+    graph.addEdge(s, y, 7);
+    graph.addEdge(y, z, 9);
+    graph.addEdge(t, y, 8);
+    graph.addEdge(z, x, 7);
+    graph.addEdge(t, z, -4);
+    graph.addEdge(y, x, -3);
+    graph.addEdge(z, s, 2);
+
+    graph.setTag("graph");
+    graph.print();
+
+    // apply the Bellman-Ford algorithm
+    ShortestPathsTree res = new BellmanFordShortestPath(graph).setStartVertex(s).applyAlgorithm();
+    // print it
+    res.print();
+    // apply the Floyd-Warshall algorithm
+    AllPairsShortPathResult floyd_result = new FloydWarshall(graph).applyAlgorithm();
+    // print the shortest paths tree of the vertex
+    floyd_result.shortestPathsTreeOf(s).print();
+    // print the shortest path between two nodes
+    System.out.println(floyd_result.shortestPathBetween(s, z).toString());
+}
+
 ```
+
+#### 4. algorithms, more examples
+this example shows the simplicity of the framework (hopefully ;)) where we apply 5
+different algorithms sequentally
+```java
+// perform a breadth first search
+BFS.BreadthFirstTree breadthFirstTree = new BFS(graph, s).applyAlgorithm();
+// perform a depth first search
+DFS.DepthFirstForest depthFirstForest = new DFS(graph).applyAlgorithm();
+// extract the strongly connected components of the graph
+ArrayList<HashSet<IVertex>> hashSets = new SCC(graph).applyAlgorithm();
+// perform a topological sort on the graph
+LinkedList<IVertex> res_sort = new TopologicalSort(graph).applyAlgorithm();
+// compute all pairs shortest paths using the Floyd-Warshall algorithm
+AllPairsShortPathResult floyd_result = new FloydWarshall(graph).applyAlgorithm();
+
+```
+
+#### 5. algorithms factories
+for major algorithms types, you can comfortably use the following algorithms factories
+* `MinSpanTreeFactory` - for Minimum Spanning Tree/Forest, for example:
+```java
+AbstractGraphAlgorithm<UndirectedGraph, IUndirectedGraph> alg = MinSpanTreeFactory.newMST(graph, MstAlgorithm.KRUSKAL, start_vertex);
+AbstractGraphAlgorithm<UndirectedGraph, IUndirectedGraph> alg2 = MinSpanTreeFactory.newMST(graph, MstAlgorithm.PRIM, start_vertex);
+```
+* `SingleSourceShortPathFactory` - for single source shortest path, for example:
+```java
+AbstractShortestPathAlgorithm alg = SingleSourceShortPathFactory.newSingleSourceShortPath(graph, SSSPAlgorithm.DIJKSTRA, start_vertex, end_vertex);
+```
+* `AllPairsShortPathFactory` - for shortest paths between all pairs, for example:
+```java
+AbstractGraphAlgorithm<AllPairsShortPathResult, IDirectedGraph> alg2 = AllPairsShortPathFactory.newAllPairsShortPath(graph, APSPAlgorithm.Johnson);```
+```
+#### 6. utilities
+a bunch of helper utilities can be found in the package **`com.hendrix.erdos.utils`**
+* **`SVertexUtils.java`** - query vertex order information inside a graph
+* **`SEdgeUtils.java`** - query edge order information inside a graph
+* **`SMatrixUtils.java`** - compute the adjacency and incidence matrix of a graph
+* **`SGraphUtils.java`** - get a sorted list of the weighted edges in a graph
 
 ### Contributions
-contributions are most welcomed, please consult [`CONTRIBUTING.MD`](CONTRIBUTING.MD)
+contributions are most welcomed, please consult [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
 ### License
 If you like it -> star or share it with others
