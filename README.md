@@ -115,7 +115,7 @@ with the correct abstractions and utilities. The builtin algorithms are:
         System.out.println(edge.toString());
     }
 
-    // removing a vertex in any of the floowing ways will remove it's connected edges as well,
+    // removing a vertex in any of the following ways will remove it's connected edges as well,
     // also removing any edge in similar fashion will update the graph :)
     graph_triangle.removeVertex(v0);
     graph_triangle.vertices().remove(v1);
@@ -140,18 +140,94 @@ a custom implementation of a graph engine.
 
 ```
 
-#### 2. Implement a View renderer
+#### 3. algorithms introduction
+every algorithm extends `AbstractGraphAlgorithm<T, E extends IGraph>`, which is generically
+typed `E` for input graph and `T` for output and must implement
+* `T applyAlgorithm()` method
+
+for example, the **`Bellman-Ford`** algorithm for single source shortest path,
+followed by the **`Floyd-Warshall`** algorithm for all pairs shortest paths.
+
 ```java
+private void BellmanFord()
+{
+    SimpleDirectedGraph graph = new SimpleDirectedGraph();
+
+    Vertex s = new Vertex("s");
+    Vertex t = new Vertex("t");
+    Vertex x = new Vertex("x");
+    Vertex y = new Vertex("y");
+    Vertex z = new Vertex("z");
+
+    graph.addVertex(s);
+    graph.addVertex(t);
+    graph.addVertex(x);
+    graph.addVertex(y);
+    graph.addVertex(z);
+
+    graph.addEdge(s, t, 6);
+    graph.addEdge(t, x, 5);
+    graph.addEdge(x, t, -2);
+    graph.addEdge(s, y, 7);
+    graph.addEdge(y, z, 9);
+    graph.addEdge(t, y, 8);
+    graph.addEdge(z, x, 7);
+    graph.addEdge(t, z, -4);
+    graph.addEdge(y, x, -3);
+    graph.addEdge(z, s, 2);
+
+    graph.setTag("graph");
+    graph.print();
+
+    // apply the Bellman-Ford algorithm
+    ShortestPathsTree res = new BellmanFordShortestPath(graph).setStartVertex(s).applyAlgorithm();
+    // print it
+    res.print();
+    // apply the Floyd-Warshall algorithm
+    AllPairsShortPathResult floyd_result = new FloydWarshall(graph).applyAlgorithm();
+    // print the shortest paths tree of the vertex
+    floyd_result.shortestPathsTreeOf(s).print();
+    // print the shortest path between two nodes
+    System.out.println(floyd_result.shortestPathBetween(s, z).toString());
+}
 
 ```
 
-#### 2. Implement a View renderer
+#### 4. algorithms, more examples
+this example shows the simplicity of the framework (hopefully ;)) where we apply 5
+different algorithms sequentally
 ```java
+    // perform a breadth first search
+    BFS.BreadthFirstTree breadthFirstTree = new BFS(graph, s).applyAlgorithm();
+    // perform a depth first search
+    DFS.DepthFirstForest depthFirstForest = new DFS(graph).applyAlgorithm();
+    // extract the strongly connected components of the graph
+    ArrayList<HashSet<IVertex>> hashSets = new SCC(graph).applyAlgorithm();
+    // perform a topological sort on the graph
+    LinkedList<IVertex> res_sort = new TopologicalSort(graph).applyAlgorithm();
+    // compute all pairs shortest paths using the Floyd-Warshall algorithm
+    AllPairsShortPathResult floyd_result = new FloydWarshall(graph).applyAlgorithm();
 
 ```
 
-#### 2. Implement a View renderer
+#### 5. algorithms factories
+for major algorithms types, you can comfortably use the following algorithms factories
+* `MinSpanTreeFactory` - for Minimum Spanning Tree/Forest, for example:
 ```java
+AbstractGraphAlgorithm<UndirectedGraph, IUndirectedGraph> alg = MinSpanTreeFactory.newMST(graph, MstAlgorithm.KRUSKAL, start_vertex);
+AbstractGraphAlgorithm<UndirectedGraph, IUndirectedGraph> alg2 = MinSpanTreeFactory.newMST(graph, MstAlgorithm.PRIM, start_vertex);
+```
+* `SingleSourceShortPathFactory` - for single source shortest path, for example:
+```java
+AbstractShortestPathAlgorithm alg = SingleSourceShortPathFactory.newSingleSourceShortPath(graph, SSSPAlgorithm.DIJKSTRA, start_vertex, end_vertex);
+```
+* `AllPairsShortPathFactory` - for shortest paths between all pairs, for example:
+```java
+AbstractGraphAlgorithm<AllPairsShortPathResult, IDirectedGraph> alg2 = AllPairsShortPathFactory.newAllPairsShortPath(graph, APSPAlgorithm.Johnson);```
+```
+#### 6. utilities
+```java
+
 
 ```
 
