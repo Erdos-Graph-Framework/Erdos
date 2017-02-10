@@ -232,7 +232,7 @@ AbstractGraphAlgorithm<AllPairsShortPathResult, IDirectedGraph> alg2 = AllPairsS
 ```
 
 ### Contributions
-contributions are most welcomed, please consult [`CONTRIBUTING.MD`](CONTRIBUTING.MD)
+contributions are most welcomed, please consult [`CONTRIBUTING.MD`](CONTRIBUTING.md)
 
 ### License
 If you like it -> star or share it with others
