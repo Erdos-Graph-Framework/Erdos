@@ -7,6 +7,7 @@
 ### wishlist
 * binary operations on graphs such as merging two graphs into one new happy graph.
 * factory methods for bulk generation of nodes.
+* more graph engines, for example an engine that is based on the adjacency matrix
 * unit testing contributions will be awesome.
 
 ### Contact Author
