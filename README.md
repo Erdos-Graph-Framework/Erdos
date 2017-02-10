@@ -226,13 +226,14 @@ AbstractShortestPathAlgorithm alg = SingleSourceShortPathFactory.newSingleSource
 AbstractGraphAlgorithm<AllPairsShortPathResult, IDirectedGraph> alg2 = AllPairsShortPathFactory.newAllPairsShortPath(graph, APSPAlgorithm.Johnson);```
 ```
 #### 6. utilities
-```java
-
-
-```
+a bunch of helper utilities can be found in the package **`com.hendrix.erdos.utils`**
+* **`SVertexUtils.java`** - query vertex order information inside a graph
+* **`SEdgeUtils.java`** - query edge order information inside a graph
+* **`SMatrixUtils.java`** - compute the adjacency and incidence matrix of a graph
+* **`SGraphUtils.java`** - get a sorted list of the weighted edges in a graph
 
 ### Contributions
-contributions are most welcomed, please consult [`CONTRIBUTING.MD`](CONTRIBUTING.md)
+contributions are most welcomed, please consult [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
 ### License
 If you like it -> star or share it with others
