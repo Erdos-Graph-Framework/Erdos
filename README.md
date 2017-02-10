@@ -88,38 +88,37 @@ with the correct abstractions and utilities. The builtin algorithms are:
 #### 1. creating a very simple graph
 
 ```java
+SimpleDirectedGraph graph_triangle = new SimpleDirectedGraph();
 
-    SimpleDirectedGraph graph_triangle = new SimpleDirectedGraph();
-    
-    Vertex v0 = new Vertex();
-    Vertex v1 = new Vertex();
-    Vertex v2 = new Vertex("tag_v2");
+Vertex v0 = new Vertex();
+Vertex v1 = new Vertex();
+Vertex v2 = new Vertex("tag_v2");
 
-    graph_triangle.addVertex(v0);
-    graph_triangle.addVertex(v1);
-    graph_triangle.addVertex(v2);
+graph_triangle.addVertex(v0);
+graph_triangle.addVertex(v1);
+graph_triangle.addVertex(v2);
 
-    Edge e_0 = graph_triangle.addEdge(v0, v1);
-    graph_triangle.addEdge(v1, v2);
-    graph_triangle.addEdge(v2, v3);
+Edge e_0 = graph_triangle.addEdge(v0, v1);
+graph_triangle.addEdge(v1, v2);
+graph_triangle.addEdge(v2, v3);
 
-    graph_triangle.print();
-    
-    // iterate the graph vertices directly
-    for (IVertex vertex : graph_triangle) {
-        System.out.println(vertex.toString());
-    }
+graph_triangle.print();
 
-    // iterate the edges of the graph
-    for (Edge edge : graph_triangle.edges()) {
-        System.out.println(edge.toString());
-    }
+// iterate the graph vertices directly
+for (IVertex vertex : graph_triangle) {
+    System.out.println(vertex.toString());
+}
 
-    // removing a vertex in any of the following ways will remove it's connected edges as well,
-    // also removing any edge in similar fashion will update the graph :)
-    graph_triangle.removeVertex(v0);
-    graph_triangle.vertices().remove(v1);
-    graph_triangle.vertices().iterator().remove();
+// iterate the edges of the graph
+for (Edge edge : graph_triangle.edges()) {
+    System.out.println(edge.toString());
+}
+
+// removing a vertex in any of the following ways will remove it's connected edges as well,
+// also removing any edge in similar fashion will update the graph :)
+graph_triangle.removeVertex(v0);
+graph_triangle.vertices().remove(v1);
+graph_triangle.vertices().iterator().remove();
 
 ```
 
@@ -127,16 +126,15 @@ with the correct abstractions and utilities. The builtin algorithms are:
 you can define your graph in terms of self loops, multi edges (per vertex) and
 a custom implementation of a graph engine.
 ```java
+boolean allow_self_loops = true;
+boolean allow_multi_edges = true;
 
-    boolean allow_self_loops = true;
-    boolean allow_multi_edges = true;
+UndirectedGraph graph_undirected = Erdos.newUndirectedGraphWithEngine(new AdjIncidenceGraphEngine(), 
+                                                                      allow_self_loops, allow_multi_edges);
 
-    UndirectedGraph graph_undirected = Erdos.newUndirectedGraphWithEngine(new AdjIncidenceGraphEngine(), 
-                                                                          allow_self_loops, allow_multi_edges);
-
-    DirectedGraph graph = Erdos.newGraphWithEngine(new AdjIncidenceGraphEngine(), 
-                                                   Edge.EDGE_DIRECTION.DIRECTED,
-                                                   allow_self_loops, allow_multi_edges);
+DirectedGraph graph = Erdos.newGraphWithEngine(new AdjIncidenceGraphEngine(), 
+                                               Edge.EDGE_DIRECTION.DIRECTED,
+                                               allow_self_loops, allow_multi_edges);
 
 ```
 
@@ -197,16 +195,16 @@ private void BellmanFord()
 this example shows the simplicity of the framework (hopefully ;)) where we apply 5
 different algorithms sequentally
 ```java
-    // perform a breadth first search
-    BFS.BreadthFirstTree breadthFirstTree = new BFS(graph, s).applyAlgorithm();
-    // perform a depth first search
-    DFS.DepthFirstForest depthFirstForest = new DFS(graph).applyAlgorithm();
-    // extract the strongly connected components of the graph
-    ArrayList<HashSet<IVertex>> hashSets = new SCC(graph).applyAlgorithm();
-    // perform a topological sort on the graph
-    LinkedList<IVertex> res_sort = new TopologicalSort(graph).applyAlgorithm();
-    // compute all pairs shortest paths using the Floyd-Warshall algorithm
-    AllPairsShortPathResult floyd_result = new FloydWarshall(graph).applyAlgorithm();
+// perform a breadth first search
+BFS.BreadthFirstTree breadthFirstTree = new BFS(graph, s).applyAlgorithm();
+// perform a depth first search
+DFS.DepthFirstForest depthFirstForest = new DFS(graph).applyAlgorithm();
+// extract the strongly connected components of the graph
+ArrayList<HashSet<IVertex>> hashSets = new SCC(graph).applyAlgorithm();
+// perform a topological sort on the graph
+LinkedList<IVertex> res_sort = new TopologicalSort(graph).applyAlgorithm();
+// compute all pairs shortest paths using the Floyd-Warshall algorithm
+AllPairsShortPathResult floyd_result = new FloydWarshall(graph).applyAlgorithm();
 
 ```
 
