@@ -1,7 +1,8 @@
-group 'com.hendrix.erdos'
-version '1.0-SNAPSHOT'
-
 apply plugin: 'java'
+apply plugin: 'maven'
+
+group 'com.github.erdos-graph-framework'
+version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.8
@@ -14,4 +15,19 @@ repositories {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile "junit:junit:4.11"
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
 }
