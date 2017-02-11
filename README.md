@@ -1,4 +1,4 @@
-<div align="center"><img src="https://vectr.com/hendrixstring/buN6JaMtL.png?width=640&height=180&select=buN6JaMtLpage0"/></div>
+<div align="center"><img src="https://vectr.com/hendrixstring/buN6JaMtL.svg?width=800&height=225&select=buN6JaMtLpage0"/></div>
 
 <p/>*Erdos* is a modular and modern Graph theoretic algorithms framework for `Java`
 <p/>[![Release](https://jitpack.io/v/Erdos-Graph-Framework/Erdos.svg)](https://jitpack.io/#Erdos-Graph-Framework/Erdos)
