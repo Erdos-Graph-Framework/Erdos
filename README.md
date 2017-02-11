@@ -1,7 +1,7 @@
-# Erdos [![Release](https://jitpack.io/v/Erdos-Graph-Framework/Erdos.svg)](https://jitpack.io/#Erdos-Graph-Framework/Erdos)
-a modular and modern Graph theoretic algorithms framework
-### Dependencies
-* none
+<div align="center"><img src="https://vectr.com/hendrixstring/buN6JaMtL.png?width=640&height=180&select=buN6JaMtLpage0"/></div>
+
+<p/>Erdos is a modular and modern Graph theoretic algorithms framework
+<p/>[![Release](https://jitpack.io/v/Erdos-Graph-Framework/Erdos.svg)](https://jitpack.io/#Erdos-Graph-Framework/Erdos)
 
 ## How to use
 
