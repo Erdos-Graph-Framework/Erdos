@@ -1,4 +1,4 @@
-# Erdos
+# Erdos [![Release](https://jitpack.io/v/Erdos-Graph-Framework/Erdos.svg)](https://jitpack.io/#Erdos-Graph-Framework/Erdos)
 a modular and modern Graph theoretic algorithms framework
 ### Dependencies
 * none
@@ -21,7 +21,9 @@ Add to your dependencies:
 
 ```groovy
 dependencies {
-    compile 'tbd'
+    compile 'com.github.Erdos-Graph-Framework:Erdos:v1.0'
+    // or the following for the current master snapshot
+    // compile 'com.github.Erdos-Graph-Framework:Erdos:master-SNAPSHOT'
 }
 ```
 
@@ -37,10 +39,6 @@ ls -l build/libs
 Option 3: grab the latest released jar
 
 [https://github.com/Erdos-Graph-Framework/Erdos/releases](https://github.com/Erdos-Graph-Framework/Erdos/releases)
-
-```bash
-
-```
 
 ## Notable technical features
 * compatible with `Java 7`
