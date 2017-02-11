@@ -1,7 +1,7 @@
 <div align="center"><img src="https://vectr.com/hendrixstring/buN6JaMtL.svg?width=800&height=225&select=buN6JaMtLpage0"/></div>
 
 <p/>*Erdos* is a modular and modern Graph theoretic algorithms framework for `Java`
-<p/>[![Release](https://jitpack.io/v/Erdos-Graph-Framework/Erdos.svg)](https://jitpack.io/#Erdos-Graph-Framework/Erdos)
+<p/>[![Build status](https://travis-ci.org/Erdos-Graph-Framework/Erdos.svg?branch=master)](https://travis-ci.org/Erdos-Graph-Framework/Erdos.svg?branch=master) [![Release](https://jitpack.io/v/Erdos-Graph-Framework/Erdos.svg)](https://jitpack.io/#Erdos-Graph-Framework/Erdos)
 
 ## How to use
 
