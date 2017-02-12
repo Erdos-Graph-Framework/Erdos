@@ -236,6 +236,9 @@ a bunch of helper utilities can be found in the package **`com.hendrix.erdos.uti
 ### Contributions
 contributions are most welcomed, please consult [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
+### what is the Erdős ?
+homage to the great hungarian mathmatician [`Paul Erdős`](https://en.wikipedia.org/wiki/Paul_Erd%C5%91s) who part of his research was rooted in combinatorial graph theory.
+
 ### License
 If you like it -> star or share it with others
 
