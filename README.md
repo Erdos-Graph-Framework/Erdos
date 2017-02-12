@@ -3,6 +3,9 @@
 <p/>*Erdos* is a very light, modular and super easy to use modern Graph theoretic algorithms framework for `Java`. It
 contains graph algorithms that you can apply swiftly with one line of code and was primarily developed to back a worker
 manager tasks for various *Java* projects including one in *Android*.
+
+*Erdos* was born because other frameworks in Java were very hard to get started with or just plain heavy (overhead wise) or just too opinionated. Erdos let the developer design it's own graph engines to optimise the runtime and comes with all of the graph algorithms you can expect.
+
 <p/>[![Build status](https://travis-ci.org/Erdos-Graph-Framework/Erdos.svg?branch=master)](https://travis-ci.org/Erdos-Graph-Framework/Erdos) [![Release](https://jitpack.io/v/Erdos-Graph-Framework/Erdos.svg)](https://jitpack.io/#Erdos-Graph-Framework/Erdos)
 
 ## How to use
@@ -83,6 +86,9 @@ with the correct abstractions and utilities. The builtin algorithms are:
 
 ## builtin graph engines
 * **Adjacency** and **Incidence** list based graph engine <br/>designed for optimal complexity for algorithms that require more than a moderate edge queries.
+* in the future, a adjacency matrix engine will be added. That will be good to certain types of graphs, where
+queries are small, and memory should be kept as small as possible.
+* you can add your own graph engine by implementing `AbstractGraphEngine`.
 
 ### Instructions, code by examples
 #### 1. creating a very simple graph
