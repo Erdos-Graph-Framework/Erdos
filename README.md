@@ -1,6 +1,8 @@
 <div align="center"><img src="https://vectr.com/hendrixstring/buN6JaMtL.svg?width=800&height=225&select=buN6JaMtLpage0"/></div>
 
-<p/>*Erdos* is a modular and modern Graph theoretic algorithms framework for `Java`
+<p/>*Erdos* is a very light, modular and super easy to use modern Graph theoretic algorithms framework for `Java`. It
+contains graph algorithms that you can apply swiftly iwth one line of code and was primarily developed to back a worker
+manager tasks for various *Java* projects including one in *Android*.
 <p/>[![Build status](https://travis-ci.org/Erdos-Graph-Framework/Erdos.svg?branch=master)](https://travis-ci.org/Erdos-Graph-Framework/Erdos) [![Release](https://jitpack.io/v/Erdos-Graph-Framework/Erdos.svg)](https://jitpack.io/#Erdos-Graph-Framework/Erdos)
 
 ## How to use
@@ -227,6 +229,9 @@ a bunch of helper utilities can be found in the package **`com.hendrix.erdos.uti
 * **`SEdgeUtils.java`** - query edge order information inside a graph
 * **`SMatrixUtils.java`** - compute the adjacency and incidence matrix of a graph
 * **`SGraphUtils.java`** - get a sorted list of the weighted edges in a graph
+
+### used in
+* [`Android-Zorn`](https://github.com/HendrixString/Android-Zorn) - for constructing a worker manager based on topological sorting in a graph.
 
 ### Contributions
 contributions are most welcomed, please consult [`CONTRIBUTING.md`](CONTRIBUTING.md)
