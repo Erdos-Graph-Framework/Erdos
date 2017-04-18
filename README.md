@@ -1,12 +1,12 @@
 <div align="center"><img src="https://vectr.com/hendrixstring/buN6JaMtL.svg?width=800&height=225&select=buN6JaMtLpage0"/></div>
-
-<p/>*Erdos* is a very light, modular and super easy to use modern Graph theoretic algorithms framework for `Java`. It
+  
+*Erdos* is a very light, modular and super easy to use modern Graph theoretic algorithms framework for `Java`. It
 contains graph algorithms that you can apply swiftly with one line of code and was primarily developed to back a worker
 manager tasks for various *Java* projects including one in *Android*.
 
 *Erdos* was born because other frameworks in Java were very hard to get started with or just plain heavy (overhead wise) or just too opinionated. Erdos let the developer design it's own graph engines to optimise the runtime and comes with all of the graph algorithms you can expect.
 
-<p/>[![Build status](https://travis-ci.org/Erdos-Graph-Framework/Erdos.svg?branch=master)](https://travis-ci.org/Erdos-Graph-Framework/Erdos) [![Release](https://jitpack.io/v/Erdos-Graph-Framework/Erdos.svg)](https://jitpack.io/#Erdos-Graph-Framework/Erdos)
+[![Build status](https://travis-ci.org/Erdos-Graph-Framework/Erdos.svg?branch=master)](https://travis-ci.org/Erdos-Graph-Framework/Erdos) [![Release](https://jitpack.io/v/Erdos-Graph-Framework/Erdos.svg)](https://jitpack.io/#Erdos-Graph-Framework/Erdos)
 
 ## How to use
 
