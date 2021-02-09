@@ -14,9 +14,9 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
-        java: [1.8]
+        java: [1.7, 1.8, 11]
       fail-fast: false
-      max-parallel: 3
+      max-parallel: 4
     name: Test JDK ${{ matrix.java }}, ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
