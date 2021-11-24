@@ -1,4 +1,4 @@
-<div align="center"><img src="https://vectr.com/hendrixstring/buN6JaMtL.svg?width=800&height=225&select=buN6JaMtLpage0"/></div>
+<div align="center"><img src="erdos.png"/></div>
   
 *Erdos* is a very light, modular and super easy to use modern Graph theoretic algorithms framework for `Java`. It
 contains graph algorithms that you can apply swiftly with one line of code and was primarily developed to back a worker
