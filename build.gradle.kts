@@ -1,27 +1,27 @@
-apply plugin: 'java'
-apply plugin: 'maven'
+plugins {
+    `java-library`
+}
 
-group 'com.github.erdos-graph-framework'
-version '1.0-SNAPSHOT'
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.8
+group="com.github.erdos-graph-framework"
+version="1.0-SNAPSHOT"
 
 repositories {
-    jcenter()
+    mavenLocal()
     mavenCentral()
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile "junit:junit:4.11"
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.1.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.1.0")
+
 }
 
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-artifacts {
-    archives sourcesJar
+tasks.test {
+    useJUnitPlatform()
 }

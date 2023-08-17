@@ -9,7 +9,7 @@
 * factory methods for bulk generation of nodes.
 * more graph engines, for example an engine that is based on the adjacency matrix
 * more graph algorithms
-* visulaization tool, i prefer html 5 based.
+* visualization tool, I prefer html 5 based.
 * github page
 * unit testing contributions will be awesome.
 
