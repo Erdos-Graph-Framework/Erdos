@@ -34,5 +34,32 @@ tasks.test {
 }
 tasks.jacocoTestReport {
     dependsOn(tasks.test) // tests are required to run before generating the report
+    finalizedBy(tasks.jacocoTestCoverageVerification)
 }
 
+tasks.jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                counter = "INSTRUCTION"
+                minimum = "0.80".toBigDecimal()
+            }
+            limit {
+                counter = "BRANCH"
+                minimum = "0.80".toBigDecimal()
+            }
+            limit {
+                counter = "LINE"
+                minimum = "0.80".toBigDecimal()
+            }
+            limit {
+                counter = "CLASS"
+                minimum = "0.90".toBigDecimal()
+            }
+            limit {
+                counter = "COMPLEXITY"
+                maximum = "0.30".toBigDecimal()
+            }
+        }
+    }
+}

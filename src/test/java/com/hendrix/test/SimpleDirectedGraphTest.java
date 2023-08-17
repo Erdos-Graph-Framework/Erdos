@@ -11,6 +11,13 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SimpleDirectedGraphTest {
+    @Test
+    public void validateGraphHasVertex() {
+        var graph=new SimpleDirectedGraph();
+        var first=new Vertex<String>("first");
+        graph.addVertex(first);
+        assertTrue(graph.hasVertex(first));
+    }
 
     @Test
     public void validateVertexBelongsToGraph() {
