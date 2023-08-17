@@ -2,13 +2,38 @@ package com.hendrix.test;
 
 import com.hendrix.erdos.algorithms.FloydWarshall;
 import com.hendrix.erdos.algorithms.factories.AllPairsShortPathFactory;
+import com.hendrix.erdos.exceptions.VertexNotFoundException;
 import com.hendrix.erdos.graphs.SimpleDirectedGraph;
 import com.hendrix.erdos.types.DirectedEdge;
-import com.hendrix.erdos.types.Edge;
 import com.hendrix.erdos.types.Vertex;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class SimpleDirectedGraphTest {
+
+    @Test
+    public void validateVertexBelongsToGraph() {
+        var graph = new SimpleDirectedGraph();
+        var first = new Vertex<String>("first");
+        var second = new Vertex<String>("second");
+        try {
+            graph.addEdge(first, second);
+            fail("Should receive a vertex not found exception");
+        } catch (VertexNotFoundException e) {
+            assertTrue(e.getMessage().contains("(first) not found in graph"), e.getMessage());
+        }
+        graph.addVertex(first);
+        try {
+            graph.addEdge(first, second);
+            fail("Should receive a vertex not found exception");
+        } catch (VertexNotFoundException e) {
+            assertTrue(e.getMessage().contains("(second) not found in graph"), e.getMessage());
+        }
+
+    }
+
+
     @Test
     public void testSimpleDirectedGraph() {
         // TODO this might be a good thing to load from JSON or XML
