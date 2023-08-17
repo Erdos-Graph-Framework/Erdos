@@ -1,5 +1,6 @@
 plugins {
     `java-library`
+    jacoco
 }
 
 java {
@@ -8,8 +9,8 @@ java {
     }
 }
 
-group="com.github.erdos-graph-framework"
-version="1.0-SNAPSHOT"
+group = "com.github.erdos-graph-framework"
+version = "1.0-SNAPSHOT"
 
 repositories {
     mavenLocal()
@@ -22,6 +23,16 @@ dependencies {
 
 }
 
+jacoco {
+    toolVersion = "0.8.9"
+    reportsDirectory.set(layout.buildDirectory.dir("customJacocoReportDir"))
+}
+
 tasks.test {
     useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
 }
+tasks.jacocoTestReport {
+    dependsOn(tasks.test) // tests are required to run before generating the report
+}
+
