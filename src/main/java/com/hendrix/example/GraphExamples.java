@@ -56,7 +56,7 @@ public class GraphExamples {
         //BellmanFord();
         //DijkstraShortestPath();
         //matrixUtils();
-        floyd_Warshall_and_johnson();
+        // floyd_Warshall_and_johnson();
         //transitiveClosure();
     }
 
@@ -98,62 +98,6 @@ public class GraphExamples {
 
         System.out.println("");
 
-    }
-
-    private void floyd_Warshall_and_johnson() {
-        SimpleDirectedGraph graph = new SimpleDirectedGraph();
-
-        Vertex v1 = new Vertex();
-        v1.setTag("1");
-        Vertex v2 = new Vertex();
-        v2.setTag("2");
-        Vertex v3 = new Vertex();
-        v3.setTag("3");
-        Vertex v4 = new Vertex();
-        v4.setTag("4");
-        Vertex v5 = new Vertex();
-        v5.setTag("5");
-
-        graph.addVertex(v1);
-        graph.addVertex(v2);
-        graph.addVertex(v3);
-        graph.addVertex(v4);
-        graph.addVertex(v5);
-
-        Edge e1_2     = new DirectedEdge(v1, v2, 3);
-        Edge e1_3     = new DirectedEdge(v1, v3, 8);
-        Edge e1_5     = new DirectedEdge(v1, v5, 4);
-
-        Edge e2_4     = new DirectedEdge(v2, v4, 1);
-        Edge e2_5     = new DirectedEdge(v2, v5, 7);
-
-        Edge e3_2     = new DirectedEdge(v3, v2, 4);
-
-        Edge e4_1     = new DirectedEdge(v4, v1, 2);
-        Edge e4_3     = new DirectedEdge(v4, v3, 5);
-
-        Edge e5_4     = new DirectedEdge(v5, v4, 6);
-
-        graph.addEdge(e1_2);
-        graph.addEdge(e1_3);
-        graph.addEdge(e1_5);
-        graph.addEdge(e2_4);
-        graph.addEdge(e2_5);
-        graph.addEdge(e3_2);
-        graph.addEdge(e4_1);
-        graph.addEdge(e4_3);
-        graph.addEdge(e5_4);
-
-        AllPairsShortPathResult floyd_result = new FloydWarshall(graph).applyAlgorithm();
-
-        floyd_result.shortestPathsTreeOf(v1).print();
-
-        System.out.println(floyd_result.shortestPathBetween(v5, v2).toString());
-
-        AllPairsShortPathResult johnson_result = AllPairsShortPathFactory.newAllPairsShortPath(graph, AllPairsShortPathFactory.APSPAlgorithm.Johnson).applyAlgorithm();
-
-
-        System.out.println("");
     }
 
     private void matrixUtils()
